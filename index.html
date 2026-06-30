@@ -22,29 +22,23 @@
 
     <div class="container mt-4 text-center">
         <div class="row">
-            <!-- المواقيت -->
             <div class="col-md-4 mb-3">
                 <div class="card p-3 shadow-sm border-0"><h5>مواقيت الصلاة</h5>
                     <div id="prayer-times" class="mt-2">جاري تحميل المواقيت...</div>
                 </div>
             </div>
-            
-            <!-- القبلة -->
             <div class="col-md-4 mb-3">
                 <div class="card p-3 shadow-sm border-0"><h5>اتجاه القبلة</h5><p class="mt-2">قريباً...</p></div>
             </div>
-            
-            <!-- الأذكار -->
             <div class="col-md-4 mb-3">
                 <div class="card p-3 shadow-sm border-0" onclick="showAzkar()">
                     <h5>أذكار اليوم</h5>
-                    <p class="mt-2">اضغط لعرض الأذكار</p>
+                    <p class="mt-2">اضغط لعرض/إخفاء الأذكار</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- نافذة الأذكار -->
     <div id="azkar-box" class="container mt-4 d-none">
         <div class="card p-4 shadow-sm border-0">
             <h5>أذكار المسلم</h5>
@@ -57,12 +51,16 @@
     </div>
 
     <script>
-        // دالة عرض الأذكار
         function showAzkar() {
-            document.getElementById('azkar-box').classList.remove('d-none');
+            const azkarBox = document.getElementById('azkar-box');
+            // التبديل بين الظهور والاختفاء
+            if (azkarBox.classList.contains('d-none')) {
+                azkarBox.classList.remove('d-none');
+            } else {
+                azkarBox.classList.add('d-none');
+            }
         }
 
-        // دالة وقت الصلاة (زي ما هي)
         function formatTime(timeString) {
             let [hours, minutes] = timeString.split(':').map(Number);
             let ampm = hours >= 12 ? 'م' : 'ص';

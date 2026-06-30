@@ -16,7 +16,7 @@
 
     <nav class="navbar navbar-dark bg-success text-white text-center">
         <div class="container">
-            <span class="navbar-brand mx-auto">تطبيق رفيق المسلم</span>
+            <span class="navbar-brand mx-auto"> رفيق المسلم</span>
         </div>
     </nav>
 
@@ -48,8 +48,17 @@
         </div>
     </div>
 
-    <!-- كود جلب مواقيت الصلاة -->
+    <!-- كود جلب مواقيت الصلاة مع التحويل لـ 12 ساعة -->
     <script>
+        // دالة لتحويل الوقت من 24 ساعة إلى 12 ساعة
+        function formatTime(timeString) {
+            let [hours, minutes] = timeString.split(':').map(Number);
+            let ampm = hours >= 12 ? 'م' : 'ص';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // الساعة 12 بتفضل 12 مش 0
+            return `${hours}:${minutes < 10 ? '0'+minutes : minutes} ${ampm}`;
+        }
+
         async function getPrayerTimes() {
             try {
                 // جلب المواقيت للقاهرة من API موثوق
@@ -60,15 +69,15 @@
                 // تحديث المربع في الصفحة
                 document.getElementById('prayer-times').innerHTML = `
                     <div style="font-size: 1.1rem; line-height: 2;">
-                        الفجر: <b>${timings.Fajr}</b><br>
-                        الظهر: <b>${timings.Dhuhr}</b><br>
-                        العصر: <b>${timings.Asr}</b><br>
-                        المغرب: <b>${timings.Maghrib}</b><br>
-                        العشاء: <b>${timings.Isha}</b>
+                        الفجر: <b>${formatTime(timings.Fajr)}</b><br>
+                        الظهر: <b>${formatTime(timings.Dhuhr)}</b><br>
+                        العصر: <b>${formatTime(timings.Asr)}</b><br>
+                        المغرب: <b>${formatTime(timings.Maghrib)}</b><br>
+                        العشاء: <b>${formatTime(timings.Isha)}</b>
                     </div>
                 `;
             } catch (error) {
-                document.getElementById('prayer-times').innerText = "تعذر تحميل المواقيت، تأكد من الاتصال بالإنترنت.";
+                document.getElementById('prayer-times').innerText = "تعذر تحميل المواقيت.";
             }
         }
         

@@ -33,7 +33,6 @@
             <div class="col-md-4 mb-3">
                 <div class="card p-3 shadow-sm border-0" onclick="showAzkar()">
                     <h5>أذكار اليوم</h5>
-                    <p class="mt-2">اضغط لعرض/إخفاء الأذكار</p>
                 </div>
             </div>
         </div>
@@ -53,7 +52,6 @@
     <script>
         function showAzkar() {
             const azkarBox = document.getElementById('azkar-box');
-            // التبديل بين الظهور والاختفاء
             if (azkarBox.classList.contains('d-none')) {
                 azkarBox.classList.remove('d-none');
             } else {
